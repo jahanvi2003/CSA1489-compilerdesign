@@ -1,7 +1,7 @@
 %{
 %}
 %%
-[A-Z.0-9]+ {printf("\n identifier valid\n");}
+[A-Z a-z][A-Z a-z 0-9]+ {printf("\n identifier valid\n");}
 .+ {printf("\n identifier invalid\n");}
 %%
 int yywrap(void){}
