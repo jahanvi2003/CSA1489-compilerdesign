@@ -1,33 +1,27 @@
-include<stdio.h>
-
+%{
+#include <stdio.h>
 %}
 
 %%
 
-\<[^>]*\> fprintf(yyout,"%s\n",yytext);
+"<html>"     printf("<html>\n");
+"</html>"    printf("</html>\n");
+"<head>"     printf("\t<head>\n");
+"</head>"    printf("\t</head>\n");
+"<title>"    printf("\t\t<title>");
+"</title>"   printf("</title>\n");
+"<body>"     printf("\t<body>\n");
+"</body>"    printf("\t</body>\n");
+"<h1>"       printf("\t\t<h1>");
+"</h1>"      printf("</h1>\n");
+"<p>"        printf("\t\t<p>");
+"</p>"       printf("</p>\n");
 
-.|\n;
+.            printf("%s", yytext);
 
 %%
 
-int yywrap()
-
-{
-
-return 1;
-
-}
-
-int main()
-
-{
-
-yyin=fopen("html_tag.html","r");
-
-yyout=fopen("output.txt","w");
-
-yylex();
-
-return 0;
-
+int main(void) {
+    yylex();
+    return 0;
 }
